@@ -17,7 +17,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # Fetches full history to ensure safe deployment branches push
+        fetch-depth: 0
 
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -41,12 +41,10 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@://github.com"
         
-        # Track and forcibly add the newly written workspace file
         git add statewise_imr_trends_1947_2026.png
         
-        # Check if changes exist, commit and push safely if they do
         if git diff --staged --quiet; then
-          echo "No chart changes detected, moving to artifact delivery stage."
+          echo "No chart changes detected, skipping commit."
         else
           git commit -m "Automated update: Synchronized statewise analysis chart assets [skip ci]"
           git push origin main
