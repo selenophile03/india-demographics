@@ -40,9 +40,7 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@://github.com"
-        
         git add statewise_imr_trends_1947_2026.png
-        
         if git diff --staged --quiet; then
           echo "No chart changes detected, skipping commit."
         else
