@@ -3,10 +3,12 @@ name: Deploy Demographic Data Pipeline
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Allows you to click a button on GitHub to run it manually
+  workflow_dispatch:
 
 permissions:
-  contents: write # Grants the server rights to update and save the new chart files
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   run-pipeline-and-deploy:
@@ -14,6 +16,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Fetches full history to ensure safe deployment branches push
 
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -32,12 +36,21 @@ jobs:
     - name: Generate Trends Visual Chart
       run: python scripts/visualize.py
 
-    - name: Commit and Push Updated Charts
+    - name: Commit and Force Sync Generated Charts
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@://github.com"
+        
+        # Track and forcibly add the newly written workspace file
         git add statewise_imr_trends_1947_2026.png
-        git diff-index --quiet HEAD || (git commit -m "Automated update: Refreshed analytical charts" && git push)
+        
+        # Check if changes exist, commit and push safely if they do
+        if git diff --staged --quiet; then
+          echo "No chart changes detected, moving to artifact delivery stage."
+        else
+          git commit -m "Automated update: Synchronized statewise analysis chart assets [skip ci]"
+          git push origin main
+        fi
 
     - name: Upload Artifacts for Deployment
       uses: actions/upload-pages-artifact@v3
@@ -47,9 +60,6 @@ jobs:
   deploy-to-pages:
     needs: run-pipeline-and-deploy
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
