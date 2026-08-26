@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>India Demographic Dashboard (1947 - 2026)</title>
+    <title>India Demographic Data Dashboard (1947 - 2026)</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 20px; line-height: 1.6; background-color: #fafbfc; color: #24292e; }
-        .header { text-align: center; margin-bottom: 40px; padding: 20px; background: linear-gradient(135deg, #ff9933, #ffffff, #128807); border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1 { margin: 10px 0; color: #000080; }
-        .card { background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #e1e4e8; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
-        img { max-width: 100%; height: auto; margin-top: 15px; border-radius: 4px; border: 1px solid #d1d5db; }
-        .footer { margin-top: 40px; text-align: center; font-size: 0.85em; color: #586069; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 950px; margin: 40px auto; padding: 0 20px; line-height: 1.6; background-color: #f8f9fa; color: #212529; }
+        .dashboard-header { text-align: center; margin-bottom: 30px; padding: 30px; background: linear-gradient(135deg, #ff9933, #ffffff, #128807); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { margin: 0; color: #000080; font-size: 2.2em; }
+        .subtitle { margin: 10px 0 0 0; color: #495057; font-size: 1.1em; }
+        .content-card { background: #ffffff; padding: 30px; border-radius: 8px; border: 1px solid #dee2e6; box-shadow: 0 4px 6px rgba(0,0,0,0.02); text-align: center; }
+        .content-card h2 { color: #343a40; margin-top: 0; }
+        .content-card p { color: #6c757d; font-size: 0.95em; margin-bottom: 20px; }
+        .chart-img { max-width: 100%; height: auto; border: 1px solid #ced4da; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .footer { text-align: center; margin-top: 40px; font-size: 0.85em; color: #6c757d; }
     </style>
 </head>
 <body>
 
-    <div class="header">
+    <div class="dashboard-header">
         <h1>🇮🇳 India Historical Demographics Live Dashboard</h1>
-        <p>Automated deployment tracking state-level Live Births, Annual Deaths, and Infant Mortality Rates (IMR)</p>
+        <p class="subtitle">Automated deployment tracking state-level Live Births, Annual Deaths, and Infant Mortality Rates (IMR)</p>
     </div>
 
-    <div class="card">
+    <div class="content-card">
         <h2>📈 Infant Mortality Rate (IMR) Downward Trends (1947 - 2026)</h2>
         <p>This graph updates dynamically using background GitHub Python compilation.</p>
-        <!-- Displays the image that your script outputs directly into the workspace root -->
-        <img src="statewise_imr_trends_1947_2026.png" alt="Statewise IMR Trends Chart">
+        <img class="chart-img" src="statewise_imr_trends_1947_2026.png" alt="Statewise IMR Trends Chart">
     </div>
 
     <div class="footer">
